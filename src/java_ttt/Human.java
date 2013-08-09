@@ -16,13 +16,14 @@ public class Human extends GameRules{
 				error_msg();
 				choose_spot (current_player); } }
 		catch (ArrayIndexOutOfBoundsException except) {
-			System.out.printf("Your answer is out of bounds. Please Enter a number in bounds : "); } 
+			System.out.println("Your answer is out of bounds. Please Enter a number in bounds");
+			choose_spot (current_player); }
 	}
 	void choose_msg(String current_player) {
 		System.out.printf("[ %s ] Enter a number of your choice : ", current_player(current_player));
 	}
 	void error_msg() {
-		System.out.println("\nThat is not an available number. Please choose a different number.");
+		System.out.println("\nThat is not an available number. Please choose a different number. :");
 	}
 	String current_player(String current_player) {
 		if (current_player == "X")
