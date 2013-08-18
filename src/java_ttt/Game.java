@@ -1,31 +1,35 @@
 package java_ttt;
 
-public class Game extends Human{
-	boolean gameover;
+public class Game {
 	String player1 = "X", player2 = "O";
-	void welcome_msg() {
+	GameBoard gameboard = new GameBoard();
+	Computer computer = new Computer();
+	Human human = new Human();
+	GameRules gamerules = new GameRules();
+
+	void welcomeMsg() {
 		System.out.println("\nWelcome to TicTacToe !!");
 	}
-	void win_msg() {
+	void winMsg() {
 		System.out.println("Congratulations ~ You Win!!"); 	
 	}
-	void tie_msg() {
+	void tieMsg() {
 		System.out.println("Game Over. Game is Tie."); 
 	}
-	void game_play() {
-		welcome_msg();
-		show_board();
+	public void gamePlay(GameBoard gameboard) {
+		welcomeMsg();
+		gameboard.showBoard();
 		while (true) {
-			choose_spot (player1);
-			show_board();
-			if (game_over()) break;
-			choose_spot (player2);
-			show_board();
-			if (game_over()) break; }
-		if(game_win()) 
-			win_msg(); 
+			human.ChooseSpot(gameboard, player1);
+			gameboard.showBoard();
+			if (gamerules.gameOver(gameboard)) break;
+			computer.ChooseSpot(gameboard, player2);
+			gameboard.showBoard();
+			if (gamerules.gameOver(gameboard)) break; }
+		if(gamerules.gameWin(gameboard)) 
+			winMsg(); 
 		else 
-			tie_msg(); 
+			tieMsg(); 
 	}
 }
 

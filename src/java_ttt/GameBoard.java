@@ -1,27 +1,29 @@
 package java_ttt;
+import java.util.*;
 
-public class GameBoard {
-	String board[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-	int available_spots;
+public class GameBoard  {
+	String spots[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 	int spot;
 	
-	void show_board() {
+	void showBoard() {
 		System.out.printf("\n------------------\n");
-		System.out.printf("|%3s  |%3s  |%3s  |\n", board[0], board[1], board[2]);
+		System.out.printf("|%3s  |%3s  |%3s  |\n", spots[0], spots[1], spots[2]);
 		System.out.printf("------------------\n");
-		System.out.printf("|%3s  |%3s  |%3s  |\n", board[3], board[4], board[5]);
+		System.out.printf("|%3s  |%3s  |%3s  |\n", spots[3], spots[4], spots[5]);
 		System.out.printf("------------------\n");
-		System.out.printf("|%3s  |%3s  |%3s  |\n", board[6], board[7], board[8]);
+		System.out.printf("|%3s  |%3s  |%3s  |\n", spots[6], spots[7], spots[8]);
 		System.out.printf("------------------\n\n");		
 	}	
-	int available_spots() {
-		available_spots = 0;
-		for(spot=0; spot<9; spot++) {
-			try {
-				if (Integer.parseInt(board[spot]) > 0)
-				available_spots += 1; }
-			catch(Exception string) { 
-				available_spots += 0; } }
-		return available_spots;
+	List <String> availableSpots() {
+		LinkedList <String> accessible_spots = new LinkedList <String>();
+		for (spot=0; spot<9; spot++) {
+			if(spots[spot].equals("O") || spots[spot].equals("X"));			
+			else 
+				accessible_spots.add(spots[spot]); }
+		return accessible_spots;
+	}	
+	void markChoiceSpot(int choice_spot, String current_player) {
+		spots[choice_spot-1] = current_player;
 	}
 }
+
