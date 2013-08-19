@@ -11,23 +11,23 @@ public class Computer extends GameRules  {
 		double minimax[] = new double[2];
 		double point = -1, best_point = -1;
 		String best_spot = "";
-		level = level;
 		if (gameOver(gameboard)) {
 			minimax[0] = getPoint(gameboard, current_player, level);
 			return minimax; }
-		for (String spot : gameboard.availableSpots()) {
-			int choice_spot = Integer.parseInt(spot);
-			gameboard.markChoiceSpot(choice_spot, current_player);
-			level++;
-			point = -(computerPlay(gameboard, changePlayer(current_player), level)[0]);
-			gameboard.markChoiceSpot(choice_spot, spot);
-			if (point > best_point) {
-				best_point = point;
-				minimax[0] = best_point;
-				best_spot = spot; 
-				double best_choice = Double.parseDouble(best_spot);
-				minimax[1] = best_choice;} }
-		return minimax;				
+		else {
+			for (String spot : gameboard.availableSpots()) {
+				int choice_spot = Integer.parseInt(spot);
+				gameboard.markChoiceSpot(choice_spot, current_player);
+				level++;
+				point = -(computerPlay(gameboard, changePlayer(current_player), level)[0]);
+				gameboard.markChoiceSpot(choice_spot, spot);
+				if (point > best_point) {
+					best_point = point;
+					minimax[0] = best_point;
+					best_spot = spot; 
+					double best_choice = Double.parseDouble(best_spot);
+					minimax[1] = best_choice; } } }
+		return minimax;		
 	}
 	double getPoint(GameBoard gameboard, String current_player, int level) {
 		if (gameWin(gameboard)) 
