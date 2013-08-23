@@ -1,17 +1,26 @@
 package java_ttt;
 
 public class Game {
-	String player1 = "X", player2 = "O";
+	String current_player, player1 = "X", player2 = "O";
 	GameBoard gameboard = new GameBoard();
 	Computer computer = new Computer();
 	Human human = new Human();
 	GameRules gamerules = new GameRules();
 
+	String currentPlayer(String current_player) {
+		if (current_player == "X")
+			return "player1";
+		else
+			return "Computer";
+	}
 	void welcomeMsg() {
 		System.out.println("\nWelcome to TicTacToe !!");
 	}
-	void winMsg() {
-		System.out.println("Congratulations ~ Win!!"); 	
+	void winMsg(String current_player) {
+		if (currentPlayer(current_player)=="player1")
+			System.out.println("Congratulations ~ Player Win!!"); 	
+		else
+			System.out.println("Sorry~ Computer Win.."); 	
 	}
 	void tieMsg() {
 		System.out.println("Game Over. Game is Tie."); 
@@ -20,14 +29,16 @@ public class Game {
 		welcomeMsg();
 		gameboard.showBoard();	
 		while (true) {
-			human.ChooseSpot(gameboard, player1);
+			current_player = player1;
+			human.ChooseSpot(gameboard, current_player);
 			gameboard.showBoard();
 			if (gamerules.gameOver(gameboard)) break;
-			computer.ChooseSpot(gameboard, player2);
+			current_player = player2;
+			computer.ChooseSpot(gameboard, current_player);
 			gameboard.showBoard();
 			if (gamerules.gameOver(gameboard)) break; }
 		if(gamerules.gameWin(gameboard)) 
-			winMsg(); 
+			winMsg(current_player); 
 		else 
 			tieMsg(); 
 	}
