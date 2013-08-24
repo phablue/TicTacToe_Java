@@ -2,9 +2,9 @@ package java_ttt;
 import java.util.*;
 
 public class GameBoard  {
-	String spots[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+	public String spots[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
-	void showBoard() {
+	public void showBoard() {
 		System.out.printf("\n------------------\n");
 		System.out.printf("|%3s  |%3s  |%3s  |\n", spots[0], spots[1], spots[2]);
 		System.out.printf("------------------\n");
@@ -13,7 +13,7 @@ public class GameBoard  {
 		System.out.printf("|%3s  |%3s  |%3s  |\n", spots[6], spots[7], spots[8]);
 		System.out.printf("------------------\n\n");		
 	}	
-	List <String> availableSpots() {
+	public List <String> availableSpots() {
 		int spot;
 		LinkedList <String> accessible_spots = new LinkedList <String>();
 		for (spot=0; spot<9; spot++) {
@@ -22,7 +22,7 @@ public class GameBoard  {
 				accessible_spots.add(spots[spot]); }
 		return accessible_spots;
 	}	
-	void markChoiceSpot(int choice_spot, String current_player) {
+	public void markChoiceSpot(int choice_spot, String current_player) {
 		spots[choice_spot-1] = current_player;
 	}
 }
