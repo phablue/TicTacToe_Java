@@ -2,7 +2,9 @@ package java_ttt;
 import java.util.*;
 
 public class GameBoard  {
-	public String spots[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+	public String spots[] = {"1", "2", "3",
+							 "4", "5", "6", 
+							 "7", "8", "9"};
 
 	public void showBoard() {
 		System.out.printf("\n------------------\n");

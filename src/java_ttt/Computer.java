@@ -1,18 +1,18 @@
 package java_ttt;
 
 public class Computer extends GameRules  {
-	void ChooseSpot(GameBoard gameboard, String current_player) {	
+	public void ChooseSpot(GameBoard gameboard, String current_player) {	
 		int startlevel = 0;
 		System.out.println ("Please wait to computer play..");
 		int choice = (int)computerPlay(gameboard, current_player, startlevel)[1];
 		gameboard.markChoiceSpot(choice, current_player);
 	}
-	double[] computerPlay(GameBoard gameboard, String current_player, int level) {
+	public double[] computerPlay(GameBoard gameboard, String current_player, int level) {
 		double minimax[] = new double[2];
 		double point = -1, best_point = -1;
 		String best_spot = "";
 		if (gameOver(gameboard)) {
-			minimax[0] = getPoint(gameboard, current_player, level);
+			minimax[0] = getPoint(gameboard, level);
 			return minimax; }
 		else {
 			for (String spot : gameboard.availableSpots()) {
@@ -29,13 +29,13 @@ public class Computer extends GameRules  {
 					minimax[1] = best_choice; } } }
 		return minimax;		
 	}
-	double getPoint(GameBoard gameboard, String current_player, int level) {
+	public double getPoint(GameBoard gameboard, int level) {
 		if (gameWin(gameboard)) 
 			return 1.0 / -level;
 		else 
 			return 0.0;	
 	}
-	String changePlayer(String current_player) {
+	public String changePlayer(String current_player) {
 		return (current_player == "X") ? "O" : "X";
 	}
 }
