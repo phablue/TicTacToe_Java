@@ -1,7 +1,7 @@
 package java_ttt;
 
 public class Computer extends GameRules  {
-	public void ChooseSpot(GameBoard gameboard, String current_player) {	
+	public void chooseSpot(GameBoard gameboard, String current_player) {	
 		int startlevel = 0;
 		System.out.println ("Please wait to computer play..");
 		int choice = (int)computerPlay(gameboard, current_player, startlevel)[1];

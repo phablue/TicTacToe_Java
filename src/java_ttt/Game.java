@@ -30,11 +30,11 @@ public class Game {
 		gameboard.showBoard();	
 		while (true) {
 			current_player = player1;
-			human.ChooseSpot(gameboard, current_player);
+			human.chooseSpot(gameboard, current_player);
 			gameboard.showBoard();
 			if (gamerules.gameOver(gameboard)) break;
 			current_player = player2;
-			computer.ChooseSpot(gameboard, current_player);
+			computer.chooseSpot(gameboard, current_player);
 			gameboard.showBoard();
 			if (gamerules.gameOver(gameboard)) break; }
 		if(gamerules.gameWin(gameboard)) 
