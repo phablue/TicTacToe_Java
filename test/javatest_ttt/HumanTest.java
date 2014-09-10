@@ -16,7 +16,7 @@ public class HumanTest {
   public void testCurrentPlayer() {
     String player;
     
-    String player = test.currentPlayer("X");
+    player = test.currentPlayer("X");
     Assert.assertSame("Returns player1 if current player X", player, "player1");
 
     player = test.currentPlayer("O");
