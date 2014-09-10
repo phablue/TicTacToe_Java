@@ -1,41 +1,37 @@
 package java_ttt;
 
-public class Computer extends GameRules  {
-	public void chooseSpot(GameBoard gameboard, String current_player) {	
-		int startlevel = 0;
-		System.out.println ("Please wait to computer play..");
-		int choice = (int)computerPlay(gameboard, current_player, startlevel)[1];
-		gameboard.markChoiceSpot(choice, current_player);
-	}
-	public double[] computerPlay(GameBoard gameboard, String current_player, int level) {
-		double minimax[] = new double[2];
-		double point = -1, best_point = -1;
-		String best_spot = "";
-		if (gameOver(gameboard)) {
-			minimax[0] = getPoint(gameboard, level);
-			return minimax; }
-		else {
-			for (String spot : gameboard.availableSpots()) {
-				int choice_spot = Integer.parseInt(spot);
-				gameboard.markChoiceSpot(choice_spot, current_player);
-				level++;
-				point = -(computerPlay(gameboard, changePlayer(current_player), level)[0]);
-				gameboard.markChoiceSpot(choice_spot, spot);
-				if (point > best_point) {
-					best_point = point;
-					minimax[0] = best_point;
-					best_spot = spot; 
-					double best_choice = Double.parseDouble(best_spot);
-					minimax[1] = best_choice; } } }
-		return minimax;		
-	}
-	public double getPoint(GameBoard gameboard, int level) {
-		if (gameWin(gameboard)) 
-			return 1.0 / -level;
-		else 
-			return 0.0;	
-	}
-	public String changePlayer(String current_player) {
-		return (current_player == "X") ? "O" : "X";
-	}
+public class Computer extends GameRules {
+  public void chooseSpot(GameBoard board, String currentPlayer) {
+    int startlevel = 0;
+    System.out.println ("\nPlease wait to computer play..\n");
+    int choice = (int)computerPlay(board, currentPlayer, startlevel)[1];
+    board.markChoiceSpot(choice, currentPlayer); }
+
+  public double[] computerPlay(GameBoard board, String currentPlayer, int level) {
+    double minimax[] = new double[2];
+    double point = -1, bestPoint = -1;
+    String bestSpot = "";
+    if (gameOver(board)) {
+      minimax[0] = getPoint(board, level);
+      return minimax; }
+    else {
+      for (String spot : board.availableSpots()) {
+        int choiceSpot = Integer.parseInt(spot);
+        board.markChoiceSpot(choiceSpot, currentPlayer);
+        level++;
+        point = -(computerPlay(board, changePlayer(currentPlayer), level)[0]);
+        board.markChoiceSpot(choiceSpot, spot);
+        if (point > bestPoint) {
+          bestPoint = point;
+          minimax[0] = bestPoint;
+          bestSpot = spot;
+          double best_choice = Double.parseDouble(bestSpot);
+          minimax[1] = best_choice; } } }
+    return minimax; }
+
+  public double getPoint(GameBoard board, int level) {
+    return gameWin(board) ? 1.0 / -level : 0.0; }
+
+  public String changePlayer(String currentPlayer) {
+    return (currentPlayer == "X") ? "O" : "X"; }
 }

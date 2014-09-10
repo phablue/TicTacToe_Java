@@ -1,46 +1,43 @@
 package java_ttt;
+import java.util.Arrays;
 
 public class GameRules {
-	public boolean win;
-	public int spot;
-	
-	public boolean checkRows(GameBoard gameboard) {
-		for (spot=0; spot<7; spot+=3) {
-			if (gameboard.spots[spot].equals(gameboard.spots[spot+1]) && gameboard.spots[spot].equals(gameboard.spots[spot+2])) { 
-				win = true; 
-				break;}
-			else
-				win = false;}
-		return win;
-	} 
-	public boolean checkColumns(GameBoard gameboard) {
-		for (spot=0; spot<3; spot++) {
-			if (gameboard.spots[spot].equals(gameboard.spots[spot+3]) && gameboard.spots[spot].equals(gameboard.spots[spot+6])) {
-				win = true;
-				break;}
-			else 
-				win = false;}
-		return win;
-	}
-	public boolean checkDiagonals(GameBoard gameboard) {
-		if (gameboard.spots[0].equals(gameboard.spots[4]) && gameboard.spots[0].equals(gameboard.spots[8]))
-			return true;
-		else if (gameboard.spots[2].equals(gameboard.spots[4]) && gameboard.spots[2].equals(gameboard.spots[6]))
-			return true;
-		else 
-			return false;
-	}
-	public boolean gameWin(GameBoard gameboard) {
-		return checkRows(gameboard) || checkColumns(gameboard) || checkDiagonals(gameboard);
-	}
-	public boolean gameTie(GameBoard gameboard) {
-		if (gameboard.availableSpots().size()==0)
-			return true;
-		else 
-			return false;
-	}
-	public boolean gameOver(GameBoard gameboard) {
-		return gameWin(gameboard) || gameTie(gameboard);
-	}
-}
+  public boolean gameOver(GameBoard board) {
+    return gameWin(board) || gameTie(board); }
 
+  public boolean gameWin(GameBoard board) {
+    return winRequirementForRow(board) || winRequirementForColumn(board) || winRequirementForDiagonal(board); }
+
+  public boolean gameTie(GameBoard board) {
+    if(board.availableSpots().size() == 0)
+      return true;
+    else 
+      return false; }
+
+  public boolean winRequirementForRow(GameBoard board) {
+    for(int i = 0; i < 9; i += 3)
+      if(checkForWin(Arrays.copyOfRange(board.spots, i, i +3 )))
+        return true;
+    return false; }
+
+  public boolean winRequirementForColumn(GameBoard board) {
+    for(int i = 0; i < 3; i++) {
+      String[] columnSpots = {board.spots[i], board.spots[i + 3], board.spots[i + 6]};
+      if(checkForWin(columnSpots))
+        return true; }
+    return false; }
+  
+  public boolean winRequirementForDiagonal(GameBoard board) {
+    String[][] diagonalSpots = {{board.spots[0], board.spots[4], board.spots[8]},
+                                {board.spots[2], board.spots[4], board.spots[6]}};
+    
+    if(checkForWin(diagonalSpots[0]))
+      return true;
+    else if(checkForWin(diagonalSpots[1]))
+      return true;
+    else
+      return false; }
+
+  public boolean checkForWin(String[] spots) {
+    return Arrays.toString(spots).equals("[X, X, X]") || Arrays.toString(spots).equals("[O, O, O]"); }
+}
