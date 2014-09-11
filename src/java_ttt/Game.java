@@ -1,44 +1,40 @@
 package java_ttt;
 
 public class Game {
-  String current_player, player1 = "X", player2 = "O";
+  String currentPlayer, player1 = "X", player2 = "O";
   GameBoard gameboard = new GameBoard();
-  Computer computer = new Computer();
-  Human human = new Human();
   GameRules gamerules = new GameRules();
+  Writer writer = new Writer();
+  Reader reader = new Reader();
+  Human human = new Human(writer, reader);
+  Computer computer = new Computer(writer);
 
-  String currentPlayer(String current_player) {
-    if (current_player == "X")
-      return "player1";
-    else
-      return "Computer"; }
+  String currentPlayer(String currentPlayer) {
+    return currentPlayer == "X" ? "player" : "Computer"; }
 
-  void welcomeMsg() {
-    System.out.println("\nWelcome to TicTacToe !!\n"); }
+  String welcomeMsg() {
+    return "\nWelcome to TicTacToe !!\n"; }
 
-  void winMsg(String current_player) {
-    if (currentPlayer(current_player)=="player1")
-      System.out.println("Congratulations ~ Player Win!!");
-    else
-      System.out.println("Sorry~ Computer Win.."); }
+  String winMessage(String currentPlayer) {
+    return "\nCongratulations," + currentPlayer + " Win!"; }
 
-  void tieMsg() {
-    System.out.println("Game Over. Game is Tie."); }
+  String tieMsg() {
+    return "\nGame Over. Game is Tie."; }
 
   public void gamePlay(GameBoard gameboard) {
-    welcomeMsg();
+    writer.printLineOut(welcomeMsg());
     gameboard.showBoard();
     while(true) {
-      current_player = player1;
-      human.chooseSpot(gameboard, current_player);
+      currentPlayer = player1;
+      human.chooseSpot(gameboard, currentPlayer);
       gameboard.showBoard();
       if(gamerules.gameOver(gameboard)) break;
-      current_player = player2;
-      computer.chooseSpot(gameboard, current_player);
+      currentPlayer = player2;
+      computer.chooseSpot(gameboard, currentPlayer);
       gameboard.showBoard();
       if(gamerules.gameOver(gameboard)) break; }
     if(gamerules.gameWin(gameboard))
-      winMsg(current_player);
+      writer.printLineOut(winMessage(currentPlayer(currentPlayer)));
     else 
-      tieMsg(); }
+      writer.printLineOut(tieMsg()); }
 }

@@ -9,7 +9,7 @@ public class ComputerTest {
   
   @Before
   public void initilize() {
-    test = new Computer();
+    test = new Computer(new Writer());
     gameboard = new GameBoard();
   }
   @Test
@@ -25,20 +25,20 @@ public class ComputerTest {
     double point;
     
     gameboard.spots = new String[] {"X", "2", "3",
-                    "4", "X", "X",
-                    "O", "O", "O"};
+                                    "4", "X", "X",
+                                    "O", "O", "O"};
     point = test.getPoint(gameboard, level);
     Assert.assertEquals("Return any value if any player win",point, 1.0 / -level, 0.0);
 
     gameboard.spots = new String[] {"X", "2", "3",
-                    "4", "X", "6",
-                    "O", "O", "X"};
+                                    "4", "X", "6",
+                                    "O", "O", "X"};
     point = test.getPoint(gameboard, level);
     Assert.assertEquals("Return any value if any player win",point, 1.0 / -level, 0.0);
     
     gameboard.spots = new String[] {"X", "2", "3",
-                    "4", "X", "X",
-                    "O", "O", "9"};
+                                    "4", "X", "X",
+                                    "O", "O", "9"};
     point = test.getPoint(gameboard, level);
     Assert.assertEquals("Return 0 if nobody win",point, 0.0, 0.0);
   }

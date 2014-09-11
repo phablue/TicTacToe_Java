@@ -9,7 +9,7 @@ public class HumanTest {
   
   @Before
   public void initilize() {
-    test = new Human();
+    test = new Human(new Writer(), new Reader());
     gameboard = new GameBoard();
   }
   @Test

@@ -1,11 +1,10 @@
 package java_ttt;
-import java.util.*;
+import java.util.LinkedList;
 
 public class GameBoard {
   public String spots[] = {"1", "2", "3",
                            "4", "5", "6",
                            "7", "8", "9"};
-  public String[][] newSpots = new String[3][3];
   
   public void showBoard() {
     for(int i = 0; i < spots.length; i += 3) {
@@ -13,12 +12,11 @@ public class GameBoard {
       if(i < 6)
         System.out.println(" ---------------"); } }
   
-  public List <String> availableSpots() {
+  public LinkedList <String> availableSpots() {
     LinkedList <String> accessible_spots = new LinkedList <String>();
-    for(int spot=0; spot<9; spot++) {
-      if(spots[spot].equals("O") || spots[spot].equals("X"));
-      else 
-        accessible_spots.add(spots[spot]); }
+    for(String spot : spots) {
+      if (!(spot.equals("O") || spot.equals("X")))
+        accessible_spots.add(spot); }
     return accessible_spots; }
   
   public void markChoiceSpot(int choice_spot, String current_player) {

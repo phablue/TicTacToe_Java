@@ -1,9 +1,14 @@
 package java_ttt;
 
 public class Computer extends GameRules {
+  Writer writer;
+
+  public Computer(Writer writer) {
+    this.writer = writer; }
+
   public void chooseSpot(GameBoard board, String currentPlayer) {
     int startlevel = 0;
-    System.out.println ("\nPlease wait to computer play..\n");
+    writer.printLineOut(computerWatingMessage());
     int choice = (int)computerPlay(board, currentPlayer, startlevel)[1];
     board.markChoiceSpot(choice, currentPlayer); }
 
@@ -34,4 +39,8 @@ public class Computer extends GameRules {
 
   public String changePlayer(String currentPlayer) {
     return (currentPlayer == "X") ? "O" : "X"; }
+
+  public String computerWatingMessage() {
+    return "\nPlease wait to computer play..\n";
+  }
 }

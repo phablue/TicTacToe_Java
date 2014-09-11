@@ -1,10 +1,17 @@
 package java_ttt;
-import java.util.*;
+import java.util.Arrays;
 
 public class Human {
+  Writer writer;
+  Reader reader;
+
+  public Human(Writer writer, Reader reader) {
+    this.writer = writer;
+    this.reader = reader; }
+
   public void chooseSpot (GameBoard board, String currentPlayer) {
-    chooseMsg(currentPlayer);
-    String input = input();
+    writer.printOut(chooseMsg(currentPlayer));
+    String input = reader.input();
     int choiceSpot = Integer.parseInt(input);
     try {
       if (Arrays.asList(board.spots).contains(input)) {
@@ -12,21 +19,17 @@ public class Human {
       else 
         unavailableSpot(board, currentPlayer); }
     catch (ArrayIndexOutOfBoundsException error) {
-      System.out.println("Your answer is out of bounds. Please Enter a number in bounds");
+      writer.printLineOut(errorMsg());
       chooseSpot (board, currentPlayer); } }
 
-  public void chooseMsg(String currentPlayer) {
-    System.out.printf("\n[ %s ] Enter a number of your choice : ", currentPlayer(currentPlayer)); }
+  public String chooseMsg(String currentPlayer) {
+    return "\n" + currentPlayer(currentPlayer) + " Enter a number of your choice : "; }
 
-  public void errorMsg() {
-    System.out.println("\nThat is not an available number. Please choose a different number. :"); }
-
-  public String input() {
-    Scanner scan = new Scanner(System.in);
-    return scan.next(); }
+  public String errorMsg() {
+    return "\nThat is not an available number. Please choose a different number. :"; }
 
   public void unavailableSpot(GameBoard board, String currentPlayer) {
-    errorMsg();
+    writer.printLineOut(errorMsg());
     chooseSpot (board, currentPlayer); }
 
   public String currentPlayer(String currentPlayer) {
