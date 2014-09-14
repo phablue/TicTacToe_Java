@@ -9,9 +9,12 @@ public class Human {
     this.writer = writer;
     this.reader = reader; }
 
-  public void chooseSpot (GameBoard board, String currentPlayer) {
+  public void chooseSpot(GameBoard board, String currentPlayer) {
     writer.printOut(chooseMsg(currentPlayer));
-    String input = reader.input();
+    String input = userInput();
+    checkAvailable(board, currentPlayer, input); }
+
+  public void checkAvailable(GameBoard board, String currentPlayer, String input) {
     int choiceSpot = Integer.parseInt(input);
     try {
       if (Arrays.asList(board.spots).contains(input)) {
@@ -22,16 +25,16 @@ public class Human {
       writer.printLineOut(errorMsg());
       chooseSpot (board, currentPlayer); } }
 
-  public String chooseMsg(String currentPlayer) {
-    return "\n" + currentPlayer(currentPlayer) + " Enter a number of your choice : "; }
-
-  public String errorMsg() {
-    return "\nThat is not an available number. Please choose a different number. :"; }
-
   public void unavailableSpot(GameBoard board, String currentPlayer) {
     writer.printLineOut(errorMsg());
-    chooseSpot (board, currentPlayer); }
+    chooseSpot(board, currentPlayer); }
 
-  public String currentPlayer(String currentPlayer) {
-    return currentPlayer == "X" ? "player1" : "player2"; }
+  public String userInput() {
+    return reader.input(); }
+  
+  String chooseMsg(String currentPlayer) {
+    return "\nEnter a number of your choice : "; }
+
+  String errorMsg() {
+    return "\nThat is not an available number. Please choose a different number. :"; }
 }
