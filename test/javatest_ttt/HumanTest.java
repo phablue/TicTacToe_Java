@@ -1,7 +1,6 @@
 package javatest_ttt;
 
 import org.junit.*;
-import org.mockito.Mockito.*;
 import java_ttt.*;
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class HumanTest {
   
   @Before
   public void initilize() {
-    human = new Human(new Writer(), new Reader(new Scanner(System.in)));
+    human = new Human(new Reader(new Scanner(System.in)), new Writer());
     gameboard = new GameBoard();
   }
   @Test
@@ -47,9 +46,10 @@ public class HumanTest {
   public void shouldGetSpotisUserInput() {
     Scanner userInput = new Scanner("4");
     Reader reader = new Reader(userInput);
+    UI ui = new UI(reader);
+
+    human = new Human(reader, new Writer());
     
-    human = new Human(new Writer(), reader);
-    
-    Assert.assertEquals("Return 4, when user input is 4", "4", human.userInput());
+    Assert.assertEquals("Return 4, when user input is 4", "4", ui.userInput());
   }
 }

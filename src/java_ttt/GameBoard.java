@@ -7,6 +7,7 @@ public class GameBoard {
                            "7", "8", "9"};
   
   public void showBoard() {
+	System.out.println();
     for(int i = 0; i < spots.length; i += 3) {
       System.out.printf("%3s  |%3s  |%3s\n", spots[i], spots[i+1], spots[i+2]);
       if(i < 6)
