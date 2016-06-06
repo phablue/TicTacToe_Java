@@ -2,19 +2,21 @@ package javatest_ttt;
 
 import org.junit.*;
 import java_ttt.*;
+
 import java.util.Scanner;
 
 public class HumanTest {
-  public Human human;
-  public GameBoard gameboard;
-  
+  private Human human;
+  private GameBoard gameboard;
+
   @Before
   public void initilize() {
     human = new Human(new Reader(new Scanner(System.in)), new Writer());
     gameboard = new GameBoard();
   }
+  
   @Test
-  public void whenPlayerChoseAvailableSpotShouldMarkaSpot () {
+  public void when_Player_Chose_Available_Spot_Should_Mark_a_Spot () {
     gameboard.spots = new String[] {"1", "X", "3",
                                     "O", "5", "6",
                                     "7", "8", "9"};
@@ -41,15 +43,15 @@ public class HumanTest {
     human.checkAvailable(gameboard, "X", choiceSpot);
 
     Assert.assertEquals("Marks 'X' on spot 8, when a player chose spot 8", gameboard.spots[7], "X");
-    }
+  }
   @Test
-  public void shouldGetSpotisUserInput() {
-    Scanner userInput = new Scanner("4");
-    Reader reader = new Reader(userInput);
-    UI ui = new UI(reader);
+  public void should_Get_Spot_is_User_Input() {
+      Scanner userInput = new Scanner("4");
+      Reader reader = new Reader(userInput);
+      UI ui = new UI(reader);
 
-    human = new Human(reader, new Writer());
-    
-    Assert.assertEquals("Return 4, when user input is 4", "4", ui.userInput());
+      human = new Human(reader, new Writer());
+      
+      Assert.assertEquals("Return 4, when user input is 4", "4", ui.userInput());
   }
 }

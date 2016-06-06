@@ -2,8 +2,8 @@ package java_ttt;
 import java.util.Arrays;
 
 public class Human {
-  Writer writer;
-  UI ui;
+  private Writer writer;
+  private UI ui;
 
   public Human(Reader reader, Writer writer) {
     ui = new UI(reader);

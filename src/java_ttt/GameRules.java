@@ -38,6 +38,6 @@ public class GameRules {
     else
       return false; }
 
-  public boolean checkForWin(String[] spots) {
+  private boolean checkForWin(String[] spots) {
     return Arrays.toString(spots).equals("[X, X, X]") || Arrays.toString(spots).equals("[O, O, O]"); }
 }

@@ -4,8 +4,8 @@ import org.junit.*;
 import java_ttt.*;
 
 public class GameRulesTest {
-  public GameRules test;
-  public GameBoard gameboard;
+  private GameRules test;
+  private GameBoard gameboard;
   
   @Before 
   public void initialize() {
